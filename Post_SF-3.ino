@@ -4,7 +4,8 @@ const int buzzer = 11;
 const int sensor = 0;
 const int button = 4;
 
-int lightLevel, buttonState; alarmStatus
+int lightLevel, buttonState; 
+int alarmStatus = 0;
 
 
 void setup()
@@ -25,23 +26,20 @@ void loop()
   {
     digitalWrite(led, HIGH);
     
-    int i = 200;
-    while ( i < 800);
-    {
-    i++;
-    tone(buzzer, i);
-    }
-    
-    while ((i >= 800) && (i < 1400))
-    {
-      i++;
-      tone(buzzer, 1400 - i);
-    }
+    tone(buzzer, 200, 10);
+
     alarmStatus = 1;
   }
-  
- while (alarmStatus == 1)
+
+  while (alarmStatus == 1)
   {
+   tone(buzzer, 200, 10);
+   delay(10);
+   tone(buzzer, 400, 10);
+   delay(10);
+   tone(buzzer, 600, 10);
+   delay(10);
+   
    buttonState = digitalRead(button);
    
    if (buttonState == HIGH)
@@ -49,6 +47,7 @@ void loop()
     digitalWrite(led, LOW);
     noTone(buzzer);
     delay(5000);
+    alarmStatus = 0;
    }
   }
 }
