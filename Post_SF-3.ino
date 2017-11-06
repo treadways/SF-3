@@ -25,8 +25,6 @@ void loop()
   if (lightLevel > 15)
   {
     digitalWrite(led, HIGH);
-    
-    tone(buzzer, 200, 10);
 
     alarmStatus = 1;
   }
@@ -45,7 +43,7 @@ void loop()
    if (buttonState == HIGH)
    {
     digitalWrite(led, LOW);
-    noTone(buzzer);
+    tone(buzzer, 0, 10);
     delay(5000);
     alarmStatus = 0;
    }
