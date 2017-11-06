@@ -24,30 +24,40 @@ void loop()
 
   if (lightLevel > 15)
   {
-    digitalWrite(led, HIGH);
-
     alarmStatus = 1;
   }
 
   while (alarmStatus == 1)
   {
+   alarm();
+
+   buttonState = digitalRead(button);
+   
+   if (buttonState == HIGH)
+   {
+    reset();
+   }
+  }
+}
+
+void alarm()
+{
+   digitalWrite(led, HIGH);
+   
    tone(buzzer, 200, 10);
    delay(10);
    tone(buzzer, 400, 10);
    delay(10);
    tone(buzzer, 600, 10);
    delay(10);
-   
-   buttonState = digitalRead(button);
-   
-   if (buttonState == HIGH)
-   {
+}   
+
+void reset()
+{
     digitalWrite(led, LOW);
     tone(buzzer, 0, 10);
     delay(5000);
     alarmStatus = 0;
-   }
-  }
 }
 
 
